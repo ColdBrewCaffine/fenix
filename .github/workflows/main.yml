@@ -24,16 +24,16 @@ jobs:
           sudo apt install -y make lsb-release qemu-user-static zip tar
           
       # Build
-      - name: Build
-        run: |
-          source env/setenv.sh config config-template.conf
-          COMPRESS_IMAGE=yes make
+    #  - name: Build
+    #    run: |
+    #      source env/setenv.sh config config-template.conf
+    #      COMPRESS_IMAGE=yes make
 
       # backup of build env
       - name: Backup all
         run: |
-          cd ${{ github.workspace }}
-          tar --exclude='/home/runner/work/fenix/fenix/backup.tar.gz' -czvf backup.tar.gz ${{ github.workspace }}/
+          cd /home/runner/work/fenix/
+          tar -czvf backup.tar.gz ${{ github.workspace }}/
           
      # Upload to GH Actions Artifacts
      #${{ github.workspace }}/build/images/*.img.xz
@@ -44,4 +44,4 @@ jobs:
         with:
           name: 'backup-Package'
           path: |
-            ${{ github.workspace }}/backup.tar.gz
+            /home/runner/work/fenix/backup.tar.gz
