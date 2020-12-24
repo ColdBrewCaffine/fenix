@@ -21,7 +21,7 @@ jobs:
       - name: Dependencies / Build config-template.conf
         run: |
           sudo apt update
-          sudo apt install -y make lsb-release qemu-user-static zip
+          sudo apt install -y make lsb-release qemu-user-static zip tar
           
       # Build
       - name: Build
@@ -29,13 +29,19 @@ jobs:
           source env/setenv.sh config config-template.conf
           COMPRESS_IMAGE=yes make
      
+     #backup of build env
+      - name: Backup all
+        run: |
+          cd ${{ github.workspace }}/
+          tar -czvf backup.tar.gz ${{ github.workspace }}/
+
      # Upload to GH Actions Artifacts
      #${{ github.workspace }}/build/images/*.img.xz
+     #!${{ github.workspace }}/build/images/logo.img
+     #!${{ github.workspace }}/build/images/rootfs.img
       - name: 'Upload To GH Artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: 'firmware-Package'
+          name: 'backup-Package'
           path: |
-            ${{ github.workspace }}/build/images/*.img.xz
-            !${{ github.workspace }}/build/images/logo.img
-            !${{ github.workspace }}/build/images/rootfs.img
+            ${{ github.workspace }}/backup.tar.gz
