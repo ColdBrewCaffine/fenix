@@ -27,7 +27,7 @@ jobs:
       - name: Backup all
         run: |
           cd ${{ github.workspace }}
-          tar -czvf ${{ github.workspace }}/backup.tar.gz ${{ github.workspace }}/
+          tar --exclude='/home/runner/work/fenix/fenix/backup.tar.gz' -czvf backup.tar.gz ${{ github.workspace }}/
           
      # Upload to GH Actions Artifacts
      #${{ github.workspace }}/build/images/*.img.xz
