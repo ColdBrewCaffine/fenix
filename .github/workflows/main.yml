@@ -26,8 +26,8 @@ jobs:
       # backup of build env
       - name: Backup all
         run: |
-          cd ${{ github.workspace }}/
-          tar -czvf backup.tar.gz ${{ github.workspace }}/
+          cd ${{ github.workspace }}
+          tar -czvf ${{ github.workspace }}/backup.tar.gz ${{ github.workspace }}/
           
      # Upload to GH Actions Artifacts
      #${{ github.workspace }}/build/images/*.img.xz
@@ -38,7 +38,7 @@ jobs:
         with:
           name: 'backup-Package'
           path: |
-            ${{ github.workspace }}/fenix/backup.tar.gz
+            ${{ github.workspace }}/backup.tar.gz
 
 
       # Build
