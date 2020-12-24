@@ -23,6 +23,12 @@ jobs:
           sudo apt update
           sudo apt install -y make lsb-release qemu-user-static zip tar
           
+      # Build
+      - name: Build
+        run: |
+          source env/setenv.sh config config-template.conf
+          COMPRESS_IMAGE=yes make
+
       # backup of build env
       - name: Backup all
         run: |
@@ -39,11 +45,3 @@ jobs:
           name: 'backup-Package'
           path: |
             ${{ github.workspace }}/backup.tar.gz
-
-
-      # Build
-      # - name: Build
-      #  run: |
-      #    source env/setenv.sh config config-template.conf
-      #    COMPRESS_IMAGE=yes make
-
