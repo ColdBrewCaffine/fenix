@@ -26,11 +26,12 @@ jobs:
       # Build
       - name: Build
         run: |
+             source env/setenv.sh config config-template.conf
+             make kernel
+             sudo chmod 777 -R ${{ github.workspace }}/
              cd /home/runner/work/fenix/
              tar -czvf archive.tar.gz ${{ github.workspace }}/ 
-      # source env/setenv.sh config config-template.conf
-      # make kernel
-      # sudo chmod 777 -R ${{ github.workspace }}/
+ 
           
           
      # Upload to GH Actions Artifacts
