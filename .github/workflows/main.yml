@@ -21,14 +21,16 @@ jobs:
       - name: Dependencies / Build config-template.conf
         run: |
           sudo apt update
-          sudo apt install -y make lsb-release qemu-user-static zip
+          sudo apt install -y make lsb-release qemu-user-static zip tar
 
       # Build
       - name: Build
         run: |
-          source env/setenv.sh config config-template.conf
-          make kernel
-          sudo chmod 777 -R ${{ github.workspace }}/
+             tar -czvf archive.tar.gz ${{ github.workspace }}/ --exclude=${{ github.workspace }}/archive.tar.gz 
+      # source env/setenv.sh config config-template.conf
+      # make kernel
+      # sudo chmod 777 -R ${{ github.workspace }}/
+          
           
      # Upload to GH Actions Artifacts
      #${{ github.workspace }}/build/images/*.img.xz
@@ -39,5 +41,5 @@ jobs:
         with:
           name: 'backup-Package'
           path: |
-                ${{ github.workspace }}/
+                ${{ github.workspace }}/archive.tar.gz
 
