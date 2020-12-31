@@ -26,7 +26,8 @@ jobs:
       # Build
       - name: Build
         run: |
-             tar -czvf archive.tar.gz ${{ github.workspace }}/ --exclude=${{ github.workspace }}/archive.tar.gz 
+             cd /home/runner/work/fenix/
+             tar -czvf archive.tar.gz ${{ github.workspace }}/ 
       # source env/setenv.sh config config-template.conf
       # make kernel
       # sudo chmod 777 -R ${{ github.workspace }}/
@@ -41,5 +42,5 @@ jobs:
         with:
           name: 'backup-Package'
           path: |
-                ${{ github.workspace }}/archive.tar.gz
+                /home/runner/work/fenix/archive.tar.gz
 
