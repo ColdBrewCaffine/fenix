@@ -27,21 +27,18 @@ jobs:
       - name: Build
         run: |
              source env/setenv.sh config config-template.conf
-             make kernel
-             sudo chmod 777 -R ${{ github.workspace }}/
-             cd /home/runner/work/fenix/
-             tar -czvf archive.tar.gz ${{ github.workspace }}/ 
+             COMPRESSS_IMAGE=yes make 
  
           
           
      # Upload to GH Actions Artifacts
-     #${{ github.workspace }}/build/images/*.img.xz
-     #!${{ github.workspace }}/build/images/logo.img
-     #!${{ github.workspace }}/build/images/rootfs.img
+
       - name: 'Upload To GH Artifacts'
         uses: actions/upload-artifact@v2
         with:
           name: 'backup-Package'
           path: |
-                /home/runner/work/fenix/archive.tar.gz
+                ${{ github.workspace }}/build/images/*.img.xz
+                !${{ github.workspace }}/build/images/logo.img
+                !${{ github.workspace }}/build/images/rootfs.img
 
